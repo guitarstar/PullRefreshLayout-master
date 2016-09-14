@@ -27,8 +27,9 @@
             android:layout_height="match_parent"
             android:background="@android:color/white"/>
     </com.solo.pullrefreshlayout.library.PullRefreshLayout>
-    ```
-###Step 4. and then
+```
+
+### Step 4. and then
 ```java
             mPullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
