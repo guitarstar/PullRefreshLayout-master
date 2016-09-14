@@ -20,7 +20,7 @@ public class PullRefreshLayout extends RelativeLayout {
     private final float DAMPINF_COEFFICIENT = 0.3f;
     private final float LOAD_THRESHOLD = 0.4f;
     private View mRefreshView , mLoadMoreView;
-    private boolean isRefreshable = true, isLoadmoreable = true , isNoMoreData , isAutoLoadMore = true;
+    private boolean isRefreshable = true, isLoadmoreable = true , isNoMoreData , isAutoLoadMore = true , isInited;
     private State state = State.IDEL;
     private Mode mMode = Mode.FOLLOW;
     private RefreshViewAdapter mRefreshViewAdapter , mLoadMoreViewAdapter;
@@ -102,6 +102,7 @@ public class PullRefreshLayout extends RelativeLayout {
      * @param state
      */
     public void setState(State state) {
+        Log.d("state" , this.state + "  " + state);
         if (this.state != state) {
             mRefreshViewAdapter.stateChange(state);
             mLoadMoreViewAdapter.stateChange(state);
@@ -328,8 +329,10 @@ public class PullRefreshLayout extends RelativeLayout {
     }
 
     public void setComplete() {
-        setRefreshing(false);
-        setLoadingMore(false);
+        startTranslateAnim(mRefreshView , 0);
+        setState(State.IDEL);
+        startTranslateAnim(mLoadMoreView , 0);
+        setState(State.IDEL);
     }
 
     public void setRefreshing(final boolean isRefreshing) {
@@ -346,10 +349,11 @@ public class PullRefreshLayout extends RelativeLayout {
                     setState(State.IDEL);
                 }
             }
-        } , 100);
+        } , isInited ? 0 : 100);
     }
 
     public void setLoadingMore(boolean isLoadingMore) {
+        Log.d("state" , "setLoadingMore" + isLoadingMore);
         if (isLoadingMore) {
             if (!isNoMoreData && state != State.LOADING_MORE && state != State.REFRESHING) {
                 startTranslateAnim(mLoadMoreView , -mLoadMoreView.getMeasuredHeight());
@@ -375,8 +379,9 @@ public class PullRefreshLayout extends RelativeLayout {
         this.isNoMoreData = isNoMoreData;
     }
 
+    ValueAnimator valueAnimator;
     private void startTranslateAnim(final View view , final float toY) {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(view.getTranslationY() , toY);
+        valueAnimator = ValueAnimator.ofFloat(view.getTranslationY() , toY);
         valueAnimator.setTarget(view);
         valueAnimator.setDuration(300).start();
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
