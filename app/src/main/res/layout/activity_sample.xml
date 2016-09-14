@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_blue_light">
+        <RadioGroup
+            android:id="@+id/mRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rbFollow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="FOLLOW"/>
+            <RadioButton
+                android:id="@+id/rbForeground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FOREGROUND"/>
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <com.solo.pullrefreshlayout.library.PullRefreshLayout
+        android:id="@+id/mRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+    </com.solo.pullrefreshlayout.library.PullRefreshLayout>
+
+</LinearLayout>
