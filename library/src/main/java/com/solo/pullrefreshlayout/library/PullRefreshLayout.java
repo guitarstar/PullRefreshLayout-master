@@ -319,6 +319,10 @@ public class PullRefreshLayout extends RelativeLayout {
         return mMode;
     }
 
+    /**
+     * set this mode of pull and refesh
+     * @param mMode
+     */
     public void setMode(Mode mMode) {
         this.mMode = mMode;
     }
