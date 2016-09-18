@@ -34,7 +34,7 @@
 
 ### Step 4. and then
 ```java
-            mPullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+mPullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
             //mPullRefreshLayout.setComplete();
@@ -51,7 +51,7 @@
 ```java
  mPullRefreshLayout.setRefreshViewAdapter(createRefreshViewAdapter());
  mPullRefreshLayout.setLoadMoreViewAdapter(createRefreshViewAdapter());
-     private RefreshViewAdapter createRefreshViewAdapter() {
+private RefreshViewAdapter createRefreshViewAdapter() {
         return new RefreshViewAdapter() {
             ImageView ivProgress;
             RotateAnimation animation;
