@@ -9,10 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.solo.pullrefreshlayout.library.DefaultLoadMoreViewAdapter;
+import com.solo.pullrefreshlayout.library.DefaultRefreshViewAdapter;
 import com.solo.pullrefreshlayout.library.PullRefreshLayout;
 import com.solo.pullrefreshlayout.library.RefreshViewAdapter;
 import com.solo.pullrefreshlayout.library.State;
@@ -89,9 +93,21 @@ public class SampleActivity extends Activity {
         mPullRefreshLayout.setRefreshing(true);
 //        mPullRefreshLayout.setAutoLoadMore(false);
 
-//        mPullRefreshLayout.setRefreshViewAdapter(createRefreshViewAdapter());
-//        mPullRefreshLayout.setLoadMoreViewAdapter(createRefreshViewAdapter());
 
+        //set custom refrsh and load more views
+        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mPullRefreshLayout.setRefreshViewAdapter(createRefreshViewAdapter());
+                    mPullRefreshLayout.setLoadMoreViewAdapter(createRefreshViewAdapter());
+                } else {
+                    mPullRefreshLayout.setRefreshViewAdapter(new DefaultRefreshViewAdapter(SampleActivity.this));
+                    mPullRefreshLayout.setLoadMoreViewAdapter(new DefaultLoadMoreViewAdapter(SampleActivity.this));
+                }
+            }
+        });
     }
 
     private RefreshViewAdapter createRefreshViewAdapter() {
