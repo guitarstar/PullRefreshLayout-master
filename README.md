@@ -1,6 +1,9 @@
-##how to use in Gradle
+## Running Affect
+![image](https://github.com/guitarstar/PullRefreshLayout-master/blob/master/screenshot/GIF.gif?raw=true)
 
-###Step 1. Add the JitPack repository to your build file
+## how to use in Gradle
+
+### Step 1. Add the JitPack repository to your build file
 ```groovy
 	allprojects {
 		repositories {
@@ -8,7 +11,7 @@
 		}
 	}
 ```
-###Step 2. Add the dependency
+### Step 2. Add the dependency
 
 ```groovy
 	dependencies {
