@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.solo.pullrefreshlayout.library.DefaultLoadMoreViewAdapter;
 import com.solo.pullrefreshlayout.library.DefaultRefreshViewAdapter;
@@ -176,9 +177,15 @@ public class SampleActivity extends Activity {
                 tv = (TextView) itemView;
             }
 
-            private void setData(String s) {
+            private void setData(final String s) {
                 tv.setMinHeight(50);
                 tv.setText(s);
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(SampleActivity.this , s , Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
     }

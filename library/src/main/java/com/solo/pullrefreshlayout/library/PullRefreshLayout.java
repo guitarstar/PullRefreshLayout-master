@@ -176,6 +176,11 @@ public class PullRefreshLayout extends RelativeLayout {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
+                boolean dispatch = false;
+                if (state != State.IDEL) {
+                    dispatch =  true;
+                }
+                //set current state
                 if (state == State.BECOMING_TO_REFRESH) {
                     startTranslateAnim(mRefreshView , mRefreshView.getMeasuredHeight());
                     setState(State.REFRESHING);
@@ -184,6 +189,10 @@ public class PullRefreshLayout extends RelativeLayout {
                     setState(State.LOADING_MORE);
                 } else if (state != State.REFRESHING && state != State.LOADING_MORE) {
                     setComplete();
+                }
+
+                if (dispatch) {
+                    return true;
                 }
                 break;
             case MotionEvent.ACTION_DOWN:
@@ -330,7 +339,6 @@ public class PullRefreshLayout extends RelativeLayout {
 
     public void setComplete() {
         startTranslateAnim(mRefreshView , 0);
-        setState(State.IDEL);
         startTranslateAnim(mLoadMoreView , 0);
         setState(State.IDEL);
     }
