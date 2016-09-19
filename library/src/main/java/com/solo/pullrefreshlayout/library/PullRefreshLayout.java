@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 
@@ -19,6 +20,7 @@ public class PullRefreshLayout extends RelativeLayout {
     private final float DRAG_RATE = 0.25f;
     private final float DAMPINF_COEFFICIENT = 0.3f;
     private final float LOAD_THRESHOLD = 0.4f;
+    private int mTouchSlop;
     private View mRefreshView , mLoadMoreView;
     private boolean isRefreshable = true, isLoadmoreable = true , isNoMoreData , isAutoLoadMore = true , isInited;
     private State state = State.IDEL;
@@ -44,6 +46,7 @@ public class PullRefreshLayout extends RelativeLayout {
     }
 
     private void init() {
+        mTouchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
         if (mRefreshViewAdapter == null) {
             mRefreshViewAdapter = new DefaultRefreshViewAdapter(getContext());
         }
@@ -201,6 +204,9 @@ public class PullRefreshLayout extends RelativeLayout {
             case MotionEvent.ACTION_MOVE:
                 float y = ev.getY();
                 float dy = lastY - y;
+                if (Math.abs(dy) < mTouchSlop && state == State.IDEL) {
+                    return super.dispatchTouchEvent(ev);
+                }
                 boolean canDown = ViewCompat.canScrollVertically(mTargetView , -1);
                 boolean canUp = ViewCompat.canScrollVertically(mTargetView , 1);
                 if (canDown && canUp) {

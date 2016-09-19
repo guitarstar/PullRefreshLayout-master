@@ -157,6 +157,7 @@ public class SampleActivity extends Activity {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             TextView textView = new TextView(SampleActivity.this);
+            textView.setPadding(30 , 10 , 30 , 10);
             return new MyViewHolder(textView);
         }
 
