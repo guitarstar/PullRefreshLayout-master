@@ -107,6 +107,7 @@ public class PullRefreshLayout extends RelativeLayout {
     public void setState(State state) {
         Log.d("state" , this.state + "  " + state);
         if (this.state != state) {
+            this.state = state;
             mRefreshViewAdapter.stateChange(state);
             mLoadMoreViewAdapter.stateChange(state);
 
@@ -122,7 +123,6 @@ public class PullRefreshLayout extends RelativeLayout {
                 }
             }
         }
-        this.state = state;
     }
 
     int offsetY = 0;
@@ -395,6 +395,10 @@ public class PullRefreshLayout extends RelativeLayout {
 
     ValueAnimator valueAnimator;
     private void startTranslateAnim(final View view , final float toY) {
+        if(valueAnimator != null) {
+            valueAnimator.end();
+            valueAnimator.cancel();
+        }
         valueAnimator = ValueAnimator.ofFloat(view.getTranslationY() , toY);
         valueAnimator.setTarget(view);
         valueAnimator.setDuration(300).start();
