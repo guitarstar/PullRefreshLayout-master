@@ -395,10 +395,6 @@ public class PullRefreshLayout extends RelativeLayout {
 
     ValueAnimator valueAnimator;
     private void startTranslateAnim(final View view , final float toY) {
-        if(valueAnimator != null) {
-            valueAnimator.end();
-            valueAnimator.cancel();
-        }
         valueAnimator = ValueAnimator.ofFloat(view.getTranslationY() , toY);
         valueAnimator.setTarget(view);
         valueAnimator.setDuration(300).start();

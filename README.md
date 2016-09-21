@@ -15,7 +15,7 @@
 
 ```groovy
 	dependencies {
-	        compile 'com.github.guitarstar:PullRefreshLayout-master:v1.0.4'
+	        compile 'com.github.guitarstar:PullRefreshLayout-master:v1.0.5'
 	}
 ```
 ###Step 3. use in xml
