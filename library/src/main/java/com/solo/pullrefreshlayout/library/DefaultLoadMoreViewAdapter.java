@@ -1,11 +1,10 @@
 package com.solo.pullrefreshlayout.library;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -22,25 +21,11 @@ public class DefaultLoadMoreViewAdapter extends RefreshViewAdapter {
     }
     @Override
     public View getView() {
-        LinearLayout linearLayout = new LinearLayout(mContext);
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-        mProgressBar = new ProgressBar(mContext , null ,android.R.attr.progressBarStyleLarge);
-        RelativeLayout.LayoutParams progressBarParams = new RelativeLayout.LayoutParams(40 , 40);
-        mProgressBar.setIndeterminateDrawable(mContext.getResources().getDrawable(R.drawable.refresh_loding));
-        mProgressBar.setVisibility(View.GONE);
-
-        mArrow = new ImageView(mContext);
-        mArrow.setImageResource(R.mipmap.refresh_head_arrow);
-        RelativeLayout.LayoutParams arrowParams = new RelativeLayout.LayoutParams(40 , 40);
-
-        mTextView = new TextView(mContext);
-
-        linearLayout.addView(mArrow , arrowParams);
-        linearLayout.addView(mProgressBar , progressBarParams);
-        linearLayout.addView(mTextView);
-        linearLayout.setPadding(0 , 15 , 0 , 15);
-        return linearLayout;
+        View view = LayoutInflater.from(mContext).inflate(R.layout.view_default_refresh_layout, null);
+        mTextView = (TextView) view.findViewById(R.id.tv);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+        mArrow = (ImageView) view.findViewById(R.id.ivArrow);
+        return view;
     }
 
     @Override
