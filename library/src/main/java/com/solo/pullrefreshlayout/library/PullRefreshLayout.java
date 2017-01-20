@@ -380,6 +380,9 @@ public class PullRefreshLayout extends RelativeLayout {
     }
 
     private boolean canLoadMore() {
+        if (!isLoadmoreable()) {
+            return false;
+        }
         boolean isFirstPageLoaded = false;
         if (mTargetView instanceof RecyclerView) {
             isFirstPageLoaded = ((RecyclerView) mTargetView).getChildCount() > 0;
