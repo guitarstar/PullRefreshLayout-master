@@ -145,7 +145,7 @@ public class PullRefreshLayout extends RelativeLayout {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                         super.onScrollStateChanged(recyclerView, newState);
-                        if (isAutoLoadMore && Utils.isScrollToBottom(PullRefreshLayout.this , mTargetView)) {
+                        if (isLoadmoreable() && isAutoLoadMore && Utils.isScrollToBottom(PullRefreshLayout.this , mTargetView)) {
                             setLoadingMore(true);
                         }
                     }
@@ -155,7 +155,7 @@ public class PullRefreshLayout extends RelativeLayout {
                 mAbsListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(AbsListView view, int scrollState) {
-                        if (isAutoLoadMore && (scrollState == SCROLL_STATE_IDLE || scrollState == SCROLL_STATE_FLING) && Utils.isScrollToBottom(PullRefreshLayout.this , mTargetView)) {
+                        if (isLoadmoreable() && isAutoLoadMore && (scrollState == SCROLL_STATE_IDLE || scrollState == SCROLL_STATE_FLING) && Utils.isScrollToBottom(PullRefreshLayout.this , mTargetView)) {
                             setLoadingMore(true);
                         }
                     }
